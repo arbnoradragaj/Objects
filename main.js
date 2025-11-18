@@ -159,3 +159,91 @@
 //Note that in the last three methods changing one part may influence another. For example, if we add 30 seconds to «20:30:45», 
 // we should get «20:31:15», not «20:30:75».
 
+
+let time = {
+    hours: 20,
+    minutes: 30,
+    seconds: 45,
+
+    showTime: function()
+    {
+        let hour = this.hours;
+        let min = this.minutes;
+        let sec = this.seconds;
+
+        if(hour<10)
+        {
+            hour="0"+hour;
+        }
+        if(min<10)
+        {
+            min = "0"+min;
+        }
+        if(sec<10)
+        {
+            sec="0"+sec;
+        }
+
+        console.log(hour + ":"+min+":"+sec);
+    },
+
+    changeSeconds: function(sec)
+    {
+        this.seconds = this.seconds + sec;
+
+        while(this.seconds>=60){
+            this.seconds = this.seconds - 60;
+            this.minutes = this.minutes+1;
+        }
+
+        while(this.minutes>=60)
+        {
+            this.minutes=this.minutes - 60;
+            this.hours = this.hours + 1;
+        }
+
+        while(this.hours>=24)
+        {
+            this.hours = this.hours - 24;
+        }
+    },
+
+
+    changeMinutes: function(min)
+    {
+        this.minutes = this.minutes + min;
+
+        while(this.minutes >=60)
+        {
+            this.minutes = this.minutes -60;
+            this.hours = this.hours + 1;
+        }
+
+        while(this.hours>=24)
+        {
+            this.hours = this.hours - 24;
+        }
+    },
+
+    changeHours: function(hrs)
+    {
+        this.hours = this.hours + hrs;
+
+        while(this.hours >=24)
+        {
+            this.hours = this.hours - 24;
+        }
+    }
+
+}
+
+
+time.showTime();
+time.changeSeconds(30);
+time.showTime();
+
+time.changeMinutes(40);
+time.showTime();
+
+time.changeHours(5);
+time.showTime();
